@@ -73,7 +73,7 @@ class VK:
                 print('...')
                 group_matches[id] = len(set(self.groups).intersection(set(groups['items'])))
             except vk.exceptions.VkAPIError:
-                print('...ops')
+                print('...')
                 time.sleep(1)
                 continue
         group_matches = sorted(group_matches.items(), key=operator.itemgetter(1), reverse=True)
@@ -84,7 +84,7 @@ class VK:
         for id in self.users_list:
             try:
                 user = self.api.users.get(v='5.101', user_id=str(id), fields='interests, books, music')
-                print('...тут')
+                print('...')
                 time.sleep(0.34)
                 try:
                     interests = \
@@ -97,7 +97,7 @@ class VK:
                     time.sleep(1)
                 interests_matches[id] = len(set(self.filter_interests).intersection(set(interests_filter)))
             except vk.exceptions.VkAPIError:
-                print('...ops')
+                print('...')
                 time.sleep(1)
                 continue
         interests_matches = sorted(interests_matches.items(), key=operator.itemgetter(1), reverse=True)
@@ -131,7 +131,7 @@ class VK:
             photo = self.api.photos.get(v='5.101', owner_id=id, album_id='profile', extended='likes')
             time.sleep(0.34)
             user = self.api.users.get(v='5.101', user_ids=id)
-            print('...photo')
+            print('...')
             time.sleep(0.34)
             top_3_photo = []
             for i in photo['items']:
@@ -155,8 +155,8 @@ class VK:
 if __name__ == '__main__':
     client = MongoClient()
     VK_db = client['VK_db']
-    skip_ids = VK_db['skip_ids103']
-    top10users = VK_db['top10users103']
+    skip_ids = VK_db['skip_ids']
+    top10users = VK_db['top10users']
 
     user = VK()
     user.get_token()
